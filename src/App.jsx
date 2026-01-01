@@ -5,7 +5,8 @@ import { Instagram, Linkedin, Github } from "lucide-react"
 import { motion } from "framer-motion"
 
 export default function App() {
-  const [expandedSection, setExpandedSection] = useState("marketplace")
+const [expandedSection, setExpandedSection] = useState(null)
+const [currentProjectImage, setCurrentProjectImage] = useState("/projects2.jpeg")
 
   const projects = [
     {
@@ -32,14 +33,22 @@ export default function App() {
       description: "Front-End: Designed and developed user interfaces with React.js, integrated designs, and optimized UX. Back-End: Configured servers and APIs with Node.js and Express.js, managed MongoDB, and maintained CRUD operations with data validation.",
       tech: "React.js, Node.js, Express.js, MongoDB, REST APIs",
       company: "ARK-X Talent Factory - Rabat"
+    },
+        {
+      id: "fullstack",
+      title: "Full Stack Development",
+      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
+      description: "Front-End: Designed and developed user interfaces with React.js, integrated designs, and optimized UX. Back-End: Configured servers and APIs with Node.js and Express.js, managed MongoDB, and maintained CRUD operations with data validation.",
+      tech: "React.js, Node.js, Express.js, MongoDB, REST APIs",
+      company: "ARK-X Talent Factory - Rabat"
     }
   ]
 
   return (
-    <div className="h-screen bg-[#45372C] text-[#A8977A] p-3 overflow-hidden">
+    <div className="min-h-screen lg:h-screen bg-[#45372C] text-[#A8977A] p-3 overflow-auto lg:overflow-hidden">
       <div className="max-w-[1400px] mx-auto h-full flex flex-col">
         {/* Header - No animation, stays still */}
-        <div className="flex justify-between items-center mb-3 mt-1 py-2 px-6 bg-[#161711] rounded-[20px]">
+        <div className="flex justify-between items-center mb-3 py-2 px-6 bg-[#161711] rounded-[20px]">
           <h1 className="text-xl font-light text-[#A8977A] italic">Abir <span className="font-normal not-italic">Elbahri</span></h1>
             <a 
               href="/abirElbahri_resume.pdf" 
@@ -64,13 +73,13 @@ export default function App() {
         </div>
 
         {/* First Row: Hero Text, Portrait, Projects */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 mb-2" style={{height: '53%'}}>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 mb-3 lg:mb-3 lg:h-[53%]">
           {/* Hero Text - Slides from portrait position (from right) */}
           <motion.div 
             initial={{ x: 350, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
-            className="md:col-span-4 bg-[#161711] rounded-[20px] p-3 flex flex-col justify-between h-full relative"
+            className="lg:col-span-5 bg-[#161711] rounded-[20px] p-6 lg:p-3 flex flex-col justify-between h-[300px] lg:h-full relative"
           >
             <div className="absolute top-3 right-3">
               <svg viewBox="0 0 100 100" className="w-20 h-20 text-[#A8977A]">
@@ -86,7 +95,7 @@ export default function App() {
               </svg>
             </div>
             <div>
-              <h2 className="text-4xl font-normal text-[#A8977A] leading-tight mt-30">
+              <h2 className="text-3xl lg:text-4xl font-normal text-[#A8977A] leading-tight mt-8 lg:mt-30">
                 <span className="">Software Engineering</span>
                 <br />
                 with Passion
@@ -101,7 +110,7 @@ export default function App() {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="md:col-span-3 bg-[#161711] rounded-[20px] overflow-hidden h-full"
+            className="lg:col-span-3 bg-[#161711] rounded-[20px] overflow-hidden h-[400px] lg:h-full"
           >
             <img
               src="/portrait.png"
@@ -111,34 +120,57 @@ export default function App() {
           </motion.div>
 
           {/* Scrollable Projects Section - Slides from portrait (from left) */}
-          <motion.div 
-            initial={{ x: -300, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
-            className="md:col-span-5 bg-[#161711] rounded-[20px] overflow-hidden flex flex-col z-10 py-3 px-4" 
-            style={{height: '146%'}}
-          >
-            <div className="overflow-y-auto h-full [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-              {projects.map((project, index) => (
-                  <div key={project.id} className={index > 0 ? 'border-t-[1.5px] border-[#A8977A]' : ''}>                  
+         <motion.div 
+              initial={{ x: -300, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
+              className="lg:col-span-4 bg-[#161711] rounded-[20px] overflow-hidden flex flex-col z-10 py-3 px-4 h-auto lg:h-[149%]" 
+            >
+              {/* Projects Title */}
+              <h2 className="text-xl font-normal text-[#A8977A] px-3 pb-2">Projects</h2>
+
+              <div className="rounded-[20px] mb-2 relative p-3">
+                <img
+                  src={currentProjectImage}
+                  alt='projects'
+                  className="w-full h-50 object-cover rounded-[20px]"
+                />
+                <div className="absolute top-0 left-0 right-0 bottom-0 bg-[#45372C]/40 rounded-[20px] m-3"></div>
+                {expandedSection && projects.find(p => p.id === expandedSection)?.link && (
+                  <a 
+                    href={projects.find(p => p.id === expandedSection).link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="absolute bottom-6 right-5 px-4 py-2 bg-[#A8977A] text-[#45372C] rounded-full text-[11px] transition-colors backdrop-blur-sm z-10 hover:bg-[#A8977A] hover:text-[#45372C]"
+                  >
+                    View More
+                  </a>
+                )}
+              </div>
+              
+              <div className="overflow-y-auto h-full [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                {projects.map((project, index) => (
+                  <div key={project.id} className={index > 0 ? 'border-t border-[#45372C]' : ''}>                  
                     <div
-                      onClick={() => setExpandedSection(project.id)}
-                      className={`w-full p-3 flex justify-between items-start cursor-pointer transition-colors ${
-                        expandedSection === project.id ? '' : ''
-                      }`}
+                      onClick={() => {
+                        const isExpanding = expandedSection !== project.id
+                        setExpandedSection(isExpanding ? project.id : null)
+                        setCurrentProjectImage(isExpanding ? project.image : "/projects.jpeg")
+                      }}                      
+                      className="w-full p-3 flex justify-between items-start cursor-pointer transition-colors"
                     >
-                      <h3 className="text-medium font-normal text-[#A8977A]">{project.title}</h3>
+                      <h3 className="text-lg font-normal text-[#A8977A]">{project.title}</h3>
                       <span className="text-[#A8977A] text-sm ml-2">
-                      {expandedSection === project.id ? (
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-                        </svg>
-                      ) : (
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
-                      )}
-                    </span>
+                        {expandedSection === project.id ? (
+                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                          </svg>
+                        ) : (
+                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                          </svg>
+                        )}
+                      </span>
                     </div>
                     
                     {expandedSection === project.id && (
@@ -149,58 +181,37 @@ export default function App() {
                         transition={{ duration: 0.3 }}
                         className="px-3 pb-3"
                       >
-                        <div className="bg-[#161711] rounded-[20px] overflow-hidden mb-2 relative">
-                          <img
-                            src={project.image}
-                            alt={project.title}
-                            className="w-full h-48 object-cover"
-                          />
-
-                        <div className="absolute top-0 left-0 right-0 h-48 bg-[#45372C]/60"></div>
-
-                          {project.link && (
-                            <a 
-                              href={project.link} 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="absolute bottom-2 right-2 px-3 py-1 bg-[#45372C] text-[#A8977A] rounded-full text-xs transition-colors backdrop-blur-sm z-10"
-                            >
-                              View More
-                            </a>
-                            
-                          )}
-                        </div>
                         <p className="text-[#A8977A] text-xs leading-relaxed mb-2">
                           {project.description}
                         </p>
                         <div className="mb-2">
-                          <p className="text-[#A8977A] text-[10px] font-semibold mb-1">Technologies: <span className="text-[#A8977A] text-[10px] font-normal">{project.tech}</span></p>
-
+                          <p className="text-[#A8977A] text-[10px] font-semibold mb-1">
+                            Technologies: <span className="">{project.tech}</span>
+                          </p>
                         </div>
                         <p className="text-[#A8977A] text-[10px] italic font-serif italic">{project.company}</p>
                       </motion.div>
                     )}
                   </div>
-              ))}
-            </div>
-          </motion.div>
+                ))}
+              </div>
+            </motion.div>
         </div>
 
         {/* Second Row: About, Contact, Social Media Column */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 mb-2" style={{height: '35%'}}>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 mb-3 lg:mb-2 lg:h-[35%]">
 
           {/* About Box - Slides from portrait position (from top-right) */}
           <motion.div 
             initial={{ x: 150, y: -200, opacity: 0 }}
             animate={{ x: 0, y: 0, opacity: 1 }}
             transition={{ delay: 0.9, duration: 0.8, ease: "easeOut" }}
-            className="md:col-span-3 bg-[#161711] rounded-[20px] py-5 pl-4 flex flex-col h-full"
+            className="lg:col-span-4 bg-[#161711] rounded-[20px] py-5 px-4 flex flex-col h-auto lg:h-full"
           >
-            <p className="text-[#A8977A] text-[10px] leading-relaxed mt-10 mr-10">
+            <p className="text-[#A8977A] text-[13px] leading-relaxed lg:mt-10 lg:mr-10">
               <span className="text-[#A8977A] font-normal">Abir Elbahri</span> is a 5th year computer engineering student specializing in 
               MERN stack development and DevOps. With experience at ARK-X Talent Factory, IT Advisor, and Open Lluna, 
-              she builds innovative web applications and cloud solutions. Currently seeking a 6-month internship to apply 
-              her skills in real-world projects.
+              she builds innovative web applications and cloud solutions. 
             </p>
           </motion.div>
 
@@ -209,16 +220,16 @@ export default function App() {
           initial={{ x: 0, y: -200, opacity: 0 }}
           animate={{ x: 0, y: 0, opacity: 1 }}
           transition={{ delay: 1.0, duration: 0.8, ease: "easeOut" }}
-          className="md:col-span-4 bg-[#A8977A] rounded-[20px] p-6 cursor-pointer hover:bg-[#161711] transition-colors group h-full relative"
+          className="lg:col-span-4 bg-[#A8977A] rounded-[20px] p-6 cursor-pointer hover:bg-[#161711] transition-colors group h-[200px] lg:h-full relative"
         >
           <div className="flex flex-col h-full">
             <p className="text-[#45372C] text-xs mb-1 group-hover:text-[#A8977A]">Let's work together</p>
-            <h3 className="text-xl md:text-4xl lg:text-5xl font-normal text-[#45372C] mt-21 group-hover:text-[#A8977A]">
+            <h3 className="text-2xl lg:text-4xl xl:text-5xl font-normal text-[#45372C] lg:mt-21 group-hover:text-[#A8977A]">
               Contact <span className="">me</span>
             </h3>
           </div>
             <svg
-              className="w-6 h-6 md:w-10 md:h-10 text-[#45372C] group-hover:text-[#A8977A] group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform absolute top-4 right-4"
+              className="w-6 h-6 lg:w-10 lg:h-10 text-[#45372C] group-hover:text-[#A8977A] group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform absolute top-4 right-4"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -237,7 +248,7 @@ export default function App() {
             initial={{ x: -150, y: -200, opacity: 0 }}
             animate={{ x: 0, y: 0, opacity: 1 }}
             transition={{ delay: 1.1, duration: 0.8, ease: "easeOut" }}
-            className="md:col-span-5 flex flex-col gap-3 h-full mt-35"
+            className="lg:col-span-4 flex flex-col gap-3 h-auto lg:h-full lg:mt-37"
           >
             {/* Social Media Icons */}
             <div className="bg-[#161711] rounded-[20px] p-5 flex justify-center gap-8">
