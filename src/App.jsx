@@ -155,7 +155,7 @@ const [currentProjectImage, setCurrentProjectImage] = useState("/projects2.jpeg"
                       onClick={() => {
                         const isExpanding = expandedSection !== project.id
                         setExpandedSection(isExpanding ? project.id : null)
-                        setCurrentProjectImage(isExpanding ? project.image : "/projects.jpeg")
+                        setCurrentProjectImage(isExpanding ? project.image : "/projects2.jpeg")
                       }}                      
                       className="w-full p-3 flex justify-between items-start cursor-pointer transition-colors"
                     >
