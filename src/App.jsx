@@ -81,26 +81,47 @@ const [currentProjectImage, setCurrentProjectImage] = useState("/projects2.jpeg"
             transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
             className="lg:col-span-5 bg-[#161711] rounded-[20px] p-6 lg:p-3 flex flex-col justify-between h-[300px] lg:h-full relative"
           >
-            <div className="absolute top-3 right-3">
-              <svg viewBox="0 0 100 100" className="w-20 h-20 text-[#A8977A]">
-                {[...Array(24)].map((_, i) => {
-                  const angle = (i * 360) / 24
+            <div className="absolute top-5 right-5">
+              <svg viewBox="0 0 100 100" className="w-25 h-25 text-[#A8977A] animate-spin" style={{ animationDuration: '8s' }}>
+                <circle cx="50" cy="50" r="20" fill="currentColor" />
+                {[...Array(16)].map((_, i) => {
+                  const angle = (i * 360) / 16
                   const rad = (angle * Math.PI) / 180
-                  const x1 = 50 + 35 * Math.cos(rad)
-                  const y1 = 50 + 35 * Math.sin(rad)
-                  const x2 = 50 + 45 * Math.cos(rad)
-                  const y2 = 50 + 45 * Math.sin(rad)
-                  return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="currentColor" strokeWidth="2" />
+                  const baseX = 50 + 22 * Math.cos(rad)
+                  const baseY = 50 + 22 * Math.sin(rad)
+                  
+                  // Create triangular rays
+                  const length = 18
+                  const width = 6
+                  
+                  const tipX = 50 + (22 + length) * Math.cos(rad)
+                  const tipY = 50 + (22 + length) * Math.sin(rad)
+                  
+                  const perpAngle1 = rad + Math.PI / 2
+                  const perpAngle2 = rad - Math.PI / 2
+                  
+                  const x1 = baseX + (width / 2) * Math.cos(perpAngle1)
+                  const y1 = baseY + (width / 2) * Math.sin(perpAngle1)
+                  const x2 = baseX + (width / 2) * Math.cos(perpAngle2)
+                  const y2 = baseY + (width / 2) * Math.sin(perpAngle2)
+                  
+                  return (
+                    <polygon
+                      key={i}
+                      points={`${x1},${y1} ${x2},${y2} ${tipX},${tipY}`}
+                      fill="currentColor"
+                    />
+                  )
                 })}
               </svg>
             </div>
             <div>
-              <h2 className="text-3xl lg:text-4xl font-normal text-[#A8977A] leading-tight mt-8 lg:mt-30">
-                <span className="">Software Engineering</span>
+              <h2 className="font-[Gambarino] tracking-tighter text-3xl lg:text-4xl font-normal text-[#A8977A] leading-tight mt-8 lg:mt-30">
+                Software<span className="italic"> Engineering</span>
                 <br />
                 with Passion
                 <br />
-                <span className="">and Innovation.</span>
+                <span className="italic">and </span>Innovation.
               </h2>
             </div>
           </motion.div>
@@ -137,15 +158,23 @@ const [currentProjectImage, setCurrentProjectImage] = useState("/projects2.jpeg"
                 />
                 <div className="absolute top-0 left-0 right-0 bottom-0 bg-[#45372C]/40 rounded-[20px] m-3"></div>
                 {expandedSection && projects.find(p => p.id === expandedSection)?.link && (
-                  <a 
-                    href={projects.find(p => p.id === expandedSection).link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="absolute bottom-6 right-5 px-4 py-2 bg-[#A8977A] text-[#45372C] rounded-full text-[11px] transition-colors backdrop-blur-sm z-10 hover:bg-[#A8977A] hover:text-[#45372C]"
-                  >
-                    View More
-                  </a>
-                )}
+                <a 
+                  href={projects.find(p => p.id === expandedSection).link} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#45372C'
+                    e.currentTarget.style.color = '#A8977A'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = '#A8977A'
+                    e.currentTarget.style.color = '#45372C'
+                  }}
+                  className="absolute bottom-6 right-5 px-4 py-2 bg-[#A8977A] text-[#45372C] rounded-full text-[11px] transition-all duration-300 backdrop-blur-sm z-10"
+                >
+                  View More
+                </a>
+              )}
               </div>
               
               <div className="overflow-y-auto h-full [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
@@ -215,33 +244,45 @@ const [currentProjectImage, setCurrentProjectImage] = useState("/projects2.jpeg"
             </p>
           </motion.div>
 
-        {/* Contact Me Box - Slides from portrait position (from top) */}
-        <motion.div 
-          initial={{ x: 0, y: -200, opacity: 0 }}
-          animate={{ x: 0, y: 0, opacity: 1 }}
-          transition={{ delay: 1.0, duration: 0.8, ease: "easeOut" }}
-          className="lg:col-span-4 bg-[#A8977A] rounded-[20px] p-6 cursor-pointer hover:bg-[#161711] transition-colors group h-[200px] lg:h-full relative"
-        >
-          <div className="flex flex-col h-full">
-            <p className="text-[#45372C] text-xs mb-1 group-hover:text-[#A8977A]">Let's work together</p>
-            <h3 className="text-2xl lg:text-4xl xl:text-5xl font-normal text-[#45372C] lg:mt-21 group-hover:text-[#A8977A]">
-              Contact <span className="">me</span>
-            </h3>
-          </div>
-            <svg
-              className="w-6 h-6 lg:w-10 lg:h-10 text-[#45372C] group-hover:text-[#A8977A] group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform absolute top-4 right-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={1.25}
+            {/* Contact Me Box - Slides from portrait position (from top) */}
+            <motion.div 
+              initial={{ x: 0, y: -200, opacity: 0 }}
+              animate={{ x: 0, y: 0, opacity: 1 }}
+              transition={{ delay: 1.0, duration: 0.8, ease: "easeOut" }}
+                onClick={() => window.open('https://mail.google.com/mail/?view=cm&fs=1&to=elbahri.abir1@gmail.com&su=Let\'s Work Together&body=Hi Abir,%0D%0A%0D%0AI would like to discuss...', '_blank')}                 onMouseEnter={(e) => {
+                const arrow = e.currentTarget.querySelector('svg')
+                if (arrow) {
+                  arrow.style.transform = 'translate(10px, -14px)'
+                }
+              }}
+              onMouseLeave={(e) => {
+                const arrow = e.currentTarget.querySelector('svg')
+                if (arrow) {
+                  arrow.style.transform = 'translate(0px, 0px)'
+                }
+              }}
+              className="lg:col-span-4 bg-[#A8977A] rounded-[20px] p-6 cursor-pointer h-[200px] lg:h-full relative"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M7 17L17 7M17 7H7M17 7V17"
-              />
-            </svg>
-        </motion.div>
+              <div className="flex flex-col h-full">
+                <p className="text-[#45372C] text-xs mb-1">Let's work together</p>
+                <h3 className="font-[Gambarino] tracking-tighter text-4xl lg:text-5xl xl:text-5xl text-[#45372C] lg:mt-21">
+                  Contact <span className="italic">me</span>
+                </h3>
+              </div>
+              <svg
+                className="w-15 h-15 lg:w-10 lg:h-10 text-[#45372C] absolute top-4 right-4 transition-all duration-300"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={1.25}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M7 17L17 7M17 7H7M17 7V17"
+                />
+              </svg>
+            </motion.div>
 
           {/* Right Column: Social Media - Slides from portrait position (from top-left) */}
           <motion.div 

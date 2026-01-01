@@ -40,3 +40,20 @@
 .read-the-docs {
   color: #888;
 }
+
+
+@font-face {
+  font-family: 'Gambarino';
+  src: url('/fonts/Gambarino-Regular.woff2') format('woff2'),
+       url('/fonts/Gambarino-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gambarino';
+  src: url('/fonts/Gambarino-Bold.woff2') format('woff2'),
+       url('/fonts/Gambarino-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
