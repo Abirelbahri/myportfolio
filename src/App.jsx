@@ -146,7 +146,7 @@ const [currentProjectImage, setCurrentProjectImage] = useState("/projects2.jpeg"
               initial={{ x: -300, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
-              className="lg:col-span-4 bg-[#161711] rounded-[20px] overflow-hidden flex flex-col z-10 py-3 px-4 h-auto lg:h-[149%] order-4" 
+              className="lg:col-span-4 bg-[#161711] rounded-[20px] overflow-hidden flex flex-col z-10 py-3 px-4 h-auto order-4" 
             >
               {/* Projects Title */}
               <h2 className="text-xl font-normal text-[#A8977A] px-3 pb-2">Projects</h2>
@@ -290,7 +290,7 @@ const [currentProjectImage, setCurrentProjectImage] = useState("/projects2.jpeg"
             initial={{ x: -150, y: -200, opacity: 0 }}
             animate={{ x: 0, y: 0, opacity: 1 }}
             transition={{ delay: 1.1, duration: 0.8, ease: "easeOut" }}
-            className="lg:col-span-4 flex flex-col gap-3 h-auto lg:h-full lg:mt-37"
+            className="lg:col-span-4 flex flex-col gap-3 h-auto lg:h-full"
           >
             {/* Social Media Icons */}
             <div className="bg-[#161711] rounded-[20px] p-5 flex justify-center gap-8">
