@@ -55,21 +55,34 @@ const [currentProjectImage, setCurrentProjectImage] = useState("/projects2.jpeg"
               download="abirElbahri_resume.pdf"
               className="text-[#A8977A] text-medium transition-colors hover:text-[#45372C] cursor-pointer flex items-center gap-2"
             >
+              {/* <svg 
+                className="w-5 h-5" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16" 
+                />
+              </svg> */}
               <span>Resume</span>
             </a>
         </div>
 
         {/* First Row: Hero Text, Portrait, Projects */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 mb-3 lg:mb-3 lg:h-[53%]">
-          {/* Hero Text - Order 1 on mobile, normal position on desktop */}
+          {/* Hero Text - Slides from portrait position (from right) */}
           <motion.div 
             initial={{ x: 350, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
-            className="lg:col-span-5 bg-[#161711] rounded-[20px] p-6 lg:p-3 flex flex-col justify-between h-[300px] lg:h-full relative order-1"
+            className="lg:col-span-5 bg-[#161711] rounded-[20px] p-6 lg:p-3 flex flex-col justify-between h-[300px] lg:h-full relative"
           >
-            <div className="absolute top-4 right-2">
-              <svg viewBox="0 0 100 100" className="w-28 h-28 text-[#A8977A] animate-spin" style={{ animationDuration: '8s' }}>
+            <div className="absolute top-5 right-5">
+              <svg viewBox="0 0 100 100" className="w-25 h-25 text-[#A8977A] animate-spin" style={{ animationDuration: '8s' }}>
                 <circle cx="50" cy="50" r="20" fill="currentColor" />
                 {[...Array(16)].map((_, i) => {
                   const angle = (i * 360) / 16
@@ -103,22 +116,22 @@ const [currentProjectImage, setCurrentProjectImage] = useState("/projects2.jpeg"
               </svg>
             </div>
             <div>
-              <h2 className="italic text-3xl lg:text-[42px] font-light text-[#A8977A] leading-tighter tracking-tighter mt-28 lg:mt-20">
-                Software<span className="font-normal"> Engineering</span>
+              <h2 className="font-[Gambarino] tracking-tighter text-3xl lg:text-4xl font-normal text-[#A8977A] leading-tight mt-8 lg:mt-30">
+                Software<span className="italic"> Engineering</span>
                 <br />
-                with Passion, Creativity
+                with Passion
                 <br />
-                <span className="font-normal">and </span>Innovation.
+                <span className="italic">and </span>Innovation.
               </h2>
             </div>
           </motion.div>
 
-          {/* Portrait Image - Order 2 on mobile, normal position on desktop */}
+          {/* Portrait Image - Appears first */}
           <motion.div 
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="lg:col-span-3 bg-[#161711] rounded-[20px] overflow-hidden h-[400px] lg:h-full order-2"
+            className="lg:col-span-3 bg-[#161711] rounded-[20px] overflow-hidden h-[400px] lg:h-full"
           >
             <img
               src="/portrait.png"
@@ -127,26 +140,12 @@ const [currentProjectImage, setCurrentProjectImage] = useState("/projects2.jpeg"
             />
           </motion.div>
 
-          {/* About Box - Order 3 on mobile only, hidden on desktop in this row */}
-          <motion.div 
-            initial={{ x: 150, y: -200, opacity: 0 }}
-            animate={{ x: 0, y: 0, opacity: 1 }}
-            transition={{ delay: 0.9, duration: 0.8, ease: "easeOut" }}
-            className="bg-[#161711] rounded-[20px] py-5 px-4 flex flex-col h-auto order-3 lg:hidden"
-          >
-            <p className="text-[#A8977A] text-[13px] leading-relaxed">
-              <span className="text-[#A8977A] font-normal">Abir Elbahri</span> is a 5th year computer engineering student specializing in 
-              MERN stack development and DevOps. With experience at ARK-X Talent Factory, IT Advisor, and Open Lluna, 
-              she builds innovative web applications and cloud solutions. 
-            </p>
-          </motion.div>
-
-          {/* Scrollable Projects Section - Order 4 on mobile, normal position on desktop */}
+          {/* Scrollable Projects Section - Slides from portrait (from left) */}
          <motion.div 
               initial={{ x: -300, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
-              className="lg:col-span-4 bg-[#161711] rounded-[20px] overflow-hidden flex flex-col z-10 py-3 px-4 h-auto lg:h-[149%] order-4" 
+              className="lg:col-span-4 bg-[#161711] rounded-[20px] overflow-hidden flex flex-col z-10 py-3 px-4 h-auto lg:h-[149%]" 
             >
               {/* Projects Title */}
               <h2 className="text-xl font-normal text-[#A8977A] px-3 pb-2">Projects</h2>
@@ -231,21 +230,21 @@ const [currentProjectImage, setCurrentProjectImage] = useState("/projects2.jpeg"
         {/* Second Row: About, Contact, Social Media Column */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 mb-3 lg:mb-2 lg:h-[35%]">
 
-          {/* About Box - Hidden on mobile, shown on desktop */}
+          {/* About Box - Slides from portrait position (from top-right) */}
           <motion.div 
             initial={{ x: 150, y: -200, opacity: 0 }}
             animate={{ x: 0, y: 0, opacity: 1 }}
             transition={{ delay: 0.9, duration: 0.8, ease: "easeOut" }}
-            className="hidden lg:flex lg:col-span-4 bg-[#161711] rounded-[20px] py-5 px-4 flex-col h-auto lg:h-full"
+            className="lg:col-span-4 bg-[#161711] rounded-[20px] py-5 px-4 flex flex-col h-auto lg:h-full"
           >
-            <p className="text-[#A8977A] text-[13px] leading-relaxed lg:mt-10 lg:mr-10">
+            <p className="text-[#A8977A] text-[13px] leading-relaxed lg:mt-11 lg:mr-11">
               <span className="text-[#A8977A] font-normal">Abir Elbahri</span> is a 5th year computer engineering student specializing in 
               MERN stack development and DevOps. With experience at ARK-X Talent Factory, IT Advisor, and Open Lluna, 
               she builds innovative web applications and cloud solutions. 
             </p>
           </motion.div>
 
-            {/* Contact Me Box */}
+            {/* Contact Me Box - Slides from portrait position (from top) */}
             <motion.div 
               initial={{ x: 0, y: -200, opacity: 0 }}
               animate={{ x: 0, y: 0, opacity: 1 }}
@@ -266,7 +265,7 @@ const [currentProjectImage, setCurrentProjectImage] = useState("/projects2.jpeg"
             >
               <div className="flex flex-col h-full">
                 <p className="text-[#45372C] text-xs mb-1">Let's work together</p>
-                <h3 className="tracking-tighter text-4xl lg:text-5xl xl:text-5xl text-[#45372C] lg:mt-21">
+                <h3 className="font-[Gambarino] tracking-tighter text-4xl lg:text-5xl xl:text-5xl text-[#45372C] lg:mt-21">
                   Contact <span className="italic">me</span>
                 </h3>
               </div>
@@ -285,7 +284,7 @@ const [currentProjectImage, setCurrentProjectImage] = useState("/projects2.jpeg"
               </svg>
             </motion.div>
 
-          {/* Right Column: Social Media */}
+          {/* Right Column: Social Media - Slides from portrait position (from top-left) */}
           <motion.div 
             initial={{ x: -150, y: -200, opacity: 0 }}
             animate={{ x: 0, y: 0, opacity: 1 }}
