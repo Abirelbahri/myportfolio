@@ -62,10 +62,10 @@ const [currentProjectImage, setCurrentProjectImage] = useState("/projects2.jpeg"
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 mb-3 lg:mb-2 flex-1">
           {/* LEFT SECTION - Contains Hero, Portrait, About, Contact */}
-          <div className="lg:col-span-8 flex flex-col gap-3">
+          <div className="lg:col-span-8 flex flex-col gap-3 lg:h-full">
             {/* First Row: Hero Text and Portrait */}
-            <div className="grid grid-cols-1 lg:grid-cols-8 gap-3 lg:h-[58%]">
-              {/* Hero Text - Order 1 on mobile, normal position on desktop */}
+<div className="grid grid-cols-1 lg:grid-cols-8 gap-3 lg:h-[59%]">
+                {/* Hero Text - Order 1 on mobile, normal position on desktop */}
               <motion.div 
                 initial={{ x: 350, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
@@ -139,13 +139,13 @@ const [currentProjectImage, setCurrentProjectImage] = useState("/projects2.jpeg"
             </div>
 
             {/* Second Row: About and Contact */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:h-[30%]">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:h-[33%]">
                 {/* About Box - Order 3 on mobile, normal on desktop */}
                 <motion.div 
                   initial={{ x: 150, y: -200, opacity: 0 }}
                   animate={{ x: 0, y: 0, opacity: 1 }}
                   transition={{ delay: 0.9, duration: 0.8, ease: "easeOut" }}
-                  className="bg-[#161711] rounded-[20px] p-6 lg:py-5 lg:px-4 flex flex-col h-auto lg:h-full order-3 lg:order-none"
+                  className="bg-[#161711] rounded-[20px] p-6 lg:py-5 lg:px-4 flex flex-col h-auto lg:h-full order-3 lg:order-0"
                 >
                 <p className="text-[#A8977A] text-[13px] leading-relaxed lg:mt-10 lg:mr-10">
                   <span className="text-[#A8977A] font-normal">Abir Elbahri</span> is a 5th year computer engineering student specializing in 
@@ -204,8 +204,8 @@ const [currentProjectImage, setCurrentProjectImage] = useState("/projects2.jpeg"
               initial={{ x: -300, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
-              className="bg-[#161711] rounded-[20px] overflow-hidden flex flex-col z-10 py-3 px-4 h-auto lg:flex-[0.86]"
-            >
+                className="bg-[#161711] rounded-[20px] overflow-hidden flex flex-col z-10 py-3 px-4 h-[80%]"           
+                >
               {/* Projects Title */}
               <h2 className="text-xl font-normal text-[#A8977A] px-3 pb-2">Projects</h2>
 
@@ -290,7 +290,7 @@ const [currentProjectImage, setCurrentProjectImage] = useState("/projects2.jpeg"
               initial={{ x: -150, y: -200, opacity: 0 }}
               animate={{ x: 0, y: 0, opacity: 1 }}
               transition={{ delay: 1.1, duration: 0.8, ease: "easeOut" }}
-              className="lg:flex-[0.12]"
+              className="lg:h-[12%]"
             >
               <div className="bg-[#161711] rounded-[20px] flex p-6 lg:p-0 justify-center gap-8 h-full items-center">
                 <a href="https://www.linkedin.com/in/abir-elbahri" target="_blank" rel="noopener noreferrer" className="text-[#A8977A] hover:text-[#45372C] transition-colors">
